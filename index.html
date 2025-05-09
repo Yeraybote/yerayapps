@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YBR</title>
+
+    <link rel="icon" href="ybr.png" type="image/png">
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: Arial, sans-serif;
+        }
+    
+        body {
+          background: linear-gradient(135deg, #ece9e6, #ffffff);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 2rem;
+          min-height: 100vh;
+        }
+    
+        header {
+          margin-bottom: 2rem;
+        }
+    
+        .logo {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          object-fit: cover;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1.5rem;
+          width: 100%;
+          max-width: 1000px;
+        }
+    
+        .card {
+          background: linear-gradient(135deg, #5899fa 0%, #b5ff3e 100%);
+          border-radius: 16px;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+          padding: 2rem 1rem;
+          text-align: center;
+          transition: transform 0.3s, box-shadow 0.3s;
+          position: relative;
+          overflow: hidden;
+        }
+    
+        .card::before {
+          content: "";
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+          transform: rotate(25deg);
+          animation: shine 3s infinite linear;
+        }
+    
+        @keyframes shine {
+          0% { transform: translateX(-100%) rotate(25deg); }
+          100% { transform: translateX(100%) rotate(25deg); }
+        }
+    
+        .card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+          cursor: pointer;
+        }
+    
+        .card-logo {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 50%;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+          background-color: #fff;
+        }
+    
+        .card-title {
+          font-size: 1.4rem;
+          font-weight: bold;
+          margin-top: 1rem;
+          color: #fff;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+    
+        .card-description {
+          font-size: 1rem;
+          margin-top: 0.5rem;
+          color: #fff;
+          text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+      </style>
+</head>
+<body>
+  <header>
+    <img src="ybr.png" alt="Logo" class="logo">
+  </header>
+
+  <section class="grid" id="apps">
+    <!-- Cards se generan desde JS -->
+  </section>
+
+  <script>
+    const apps = [
+      {
+        title: "YERGM",
+        description: "App para la introducción y visualización de datos de entrenamiento.",
+        url: "https://yeraybote.github.io/yergm/",
+        logo: "yergym-logo.jpg"
+      },
+      {
+        title: "YERMAP",
+        description: "Recopilación de restaurantes y sitios interesantes por localización.",
+        url: "https://yeraybote.github.io/yermap/",
+        logo: "yermap-logo.jpg"
+      },
+      {
+        title: "YBR",
+        description: "Página personal de Yeray Bote.",
+        url: "https://yeraybote.github.io/yeraybote/",
+        logo: "profile_yeray.jpg"
+      },
+      // Añade más apps aquí
+    ];
+
+    const container = document.getElementById('apps');
+
+    apps.forEach(app => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.onclick = () => window.open(app.url, '_blank');
+
+      card.innerHTML = `
+        <img src="${app.logo}" alt="Logo ${app.title}" class="card-logo">
+        <div class="card-title">${app.title}</div>
+        <div class="card-description">${app.description}</div>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
